@@ -1,68 +1,54 @@
-
-public class driver {
-
-	static int indx=0;
-	static String s;
-	
-	public static char readNextToken()
-	{
-		return s.charAt(indx++);
+public class Driver {
+public static void main(String[] args) {
+	q1 qa=new q1("((a,a),(a))$");
+	if(qa.S()) {
+		qa.read_next_token();
+		if(qa.token=='$')
+			System.out.println("q1 Accepted");
+		else
+			System.out.println("q1 Not Accepted");
+	}
+	else {
+		System.out.println("q1 Not Accepted");
 	}
 	
-	public static boolean Start()
-	{
-		System.out.println("Start");
-		int sp=indx;
-		char token=readNextToken();
-		//System.out.println(token);
-		//if(token=='$')		return false;
-		
-		if(token=='a' || token=='^')	
-		{
-			return true;
+	
+	q6 qf=new q6("a+b*b+1$");
+	if(qf.S()) {
+		qf.read_next_token();
+		if(qf.token=='$')
+			System.out.println("q6 Accepted");
+		else {
+			System.out.println("q6 Not Accepted");
 		}
-		else if(token=='(' && T())
-		{
-			token=readNextToken();
-			//System.out.println(token);
-			//if(token=='$')		return false;
-			if(token==')')		return true;
+	}
+	else {
+		System.out.println("q6 Not Accepted");
+	}
+	
+	q7 qg=new q7("ans=(a**b)/(d*c)$");
+	if(qg.A()) {
+		qg.read_next_token();
+		if(qg.token=='$')
+			System.out.println("q7 Accepted");
+		else {
+			System.out.println("q7 Not Accepted");
 		}
-		indx=sp;
-		return false;		 
 	}
-	
-	public static boolean T()
-	{
-		System.out.println("T");
-		int sp=indx;
-		if(Start() && T2() )	return true;
-		indx=sp;
-		return false;		
+	else {
+		System.out.println("q7 Not Accepted");
 	}
-	
-	public static boolean T2()
-	{
-		System.out.println("T2");
-		int sp=indx;
-		char token=readNextToken();
-		//System.out.println(token);
-		//if(token=='$')	return false;
-		if(token==',' && Start() && T2())	
-		{
-			return true;
+	q8 qh=new q8("id=num;id(num)$");
+	if(qh.L()) {
+		qh.read_next_token();
+		if(qh.token=='$')
+			System.out.println("q8 Accepted");
+		else {
+			System.out.println("q8 Not Accepted");
 		}
-		indx=sp;
-		return true;	
 	}
-	
-	public static void main(String[] args) {
-		s="((a,a),(a))";
-		s+="$";
-		
-		if(Start())	System.out.println("AC");
-		else		System.out.println("Not Correct");
-			
+	else {
+		System.out.println("q8 Not Accepted");
 	}
-
+}
 }
