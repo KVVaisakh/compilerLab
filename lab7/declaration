@@ -1,0 +1,25 @@
+import java_cup.runtime.Symbol;
+import java_cup.runtime.Scanner;
+%%
+%cup
+
+%eofval{
+	return new Symbol(sym.EOFILE);
+%eofval}
+%%
+
+"int " {System.out.println("LA TYPE "+yytext());return new Symbol(sym.TYPE);}
+"float " {System.out.println("LA TYPE "+yytext());return new Symbol(sym.TYPE);}
+[a-z]([a-z][0-9])* {System.out.println("LA ID "+yytext());return new Symbol(sym.ID);}
+"," {System.out.println("LA "+yytext());return new Symbol(sym.COMMA);}
+"+" {System.out.println("LA "+yytext());return new Symbol(sym.PLUS);}
+"-" {System.out.println("LA "+yytext());return new Symbol(sym.MINUS);}
+"*" {System.out.println("LA "+yytext());return new Symbol(sym.TIMES);}
+"/" {System.out.println("LA "+yytext());return new Symbol(sym.DIVIDE);}
+"%" {System.out.println("LA "+yytext());return new Symbol(sym.MOD);}
+";" {System.out.println("LA "+yytext());return new Symbol(sym.SEMI);}
+"(" {System.out.println("LA "+yytext());return new Symbol(sym.LPAREN);}
+")" {System.out.println("LA "+yytext());return new Symbol(sym.RPAREN);}
+[\n] {System.out.println("LA newline");return new Symbol(sym.NL);}
+[0-9]+ {System.out.println("LA "+yytext());
+return new Symbol(sym.NUMBER ,new Integer(yytext()));}
