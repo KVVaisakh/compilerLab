@@ -207,27 +207,20 @@ class Yylex implements java_cup.runtime.Scanner {
 		/* 13 */ YY_NO_ANCHOR,
 		/* 14 */ YY_NO_ANCHOR,
 		/* 15 */ YY_NO_ANCHOR,
-		/* 16 */ YY_NOT_ACCEPT,
-		/* 17 */ YY_NOT_ACCEPT,
-		/* 18 */ YY_NOT_ACCEPT,
-		/* 19 */ YY_NOT_ACCEPT,
-		/* 20 */ YY_NOT_ACCEPT,
-		/* 21 */ YY_NOT_ACCEPT,
-		/* 22 */ YY_NOT_ACCEPT,
-		/* 23 */ YY_NO_ANCHOR,
-		/* 24 */ YY_NO_ANCHOR
+		/* 16 */ YY_NO_ANCHOR,
+		/* 17 */ YY_NO_ANCHOR
 	};
 	private int yy_cmap[] = unpackFromString(1,130,
-"0:10,20,0:21,4,0:4,16,0:2,18,19,14,12,11,13,0,15,10:10,0,17,0:37,8,9:4,5,9:" +
-"2,1,9:2,6,9,2,7,9:4,3,9:6,0:5,21:2")[0];
+"0:10,1,0:21,5,0:11,3,0:3,13:10,0,2,0,4,0:3,12:26,0:6,12:6,11,12,6,12:4,7,12" +
+":3,10,9,8,12:6,0:5,14:2")[0];
 
-	private int yy_rmap[] = unpackFromString(1,25,
-"0,1,2,3:13,4,5,6,7,8,9,10,11,12")[0];
+	private int yy_rmap[] = unpackFromString(1,18,
+"0,1:5,2,3,1,4:2,5,6,7,8,9,4,10")[0];
 
-	private int yy_nxt[][] = unpackFromString(13,22,
-"-1,1,23:2,-1,24,23:4,2,3,4,5,6,7,8,9,10,11,12,13,-1,16,17,16,-1,16:5,-1:22," +
-"2,-1:43,23,-1:14,19,-1:6,23,-1:18,20,-1:2,23,-1:15,14,-1:25,21,-1:16,22,-1:" +
-"22,15,-1:18,16:3,-1,16:5,-1:13,16:3,-1,16,18,16:3,-1:12");
+	private int yy_nxt[][] = unpackFromString(11,15,
+"-1,1,2,3,4,5,6,16:2,17,16:3,7,8,-1:21,16,11,16:6,-1:14,7,-1:7,16:8,-1:7,16:" +
+"2,9,16:5,-1:7,16:4,13,16:3,-1:7,14,16:7,-1:7,16,15,16:6,-1:7,16:5,10,16:2,-" +
+"1:7,16:2,12,16:5,-1");
 
 	public java_cup.runtime.Symbol next_token ()
 		throws java.io.IOException {
@@ -252,7 +245,7 @@ class Yylex implements java_cup.runtime.Scanner {
 			yy_next_state = yy_nxt[yy_rmap[yy_state]][yy_cmap[yy_lookahead]];
 			if (YY_EOF == yy_lookahead && true == yy_initial) {
 
-	return new Symbol(sym.EOFILE);
+return new Symbol(sym.EOFILE);
 			}
 			if (YY_F != yy_next_state) {
 				yy_state = yy_next_state;
@@ -275,12 +268,11 @@ class Yylex implements java_cup.runtime.Scanner {
 					yy_to_mark();
 					switch (yy_last_accept_state) {
 					case 1:
-						{System.out.println("LA ID "+yytext());return new Symbol(sym.ID);}
+						{System.out.println("NL "+yytext());return new Symbol(sym.NL);}
 					case -2:
 						break;
 					case 2:
-						{System.out.println("LA "+yytext());
-return new Symbol(sym.NUMBER ,new Integer(yytext()));}
+						{System.out.println("LA "+yytext());return new Symbol(sym.SEMI);}
 					case -3:
 						break;
 					case 3:
@@ -288,59 +280,59 @@ return new Symbol(sym.NUMBER ,new Integer(yytext()));}
 					case -4:
 						break;
 					case 4:
-						{System.out.println("LA "+yytext());return new Symbol(sym.PLUS);}
+						{System.out.println("EQ "+yytext());return new Symbol(sym.EQ);}
 					case -5:
 						break;
 					case 5:
-						{System.out.println("LA "+yytext());return new Symbol(sym.MINUS);}
+						{System.out.println("LA "+yytext());return new Symbol(sym.SPACE);}
 					case -6:
 						break;
 					case 6:
-						{System.out.println("LA "+yytext());return new Symbol(sym.TIMES);}
+						{System.out.println("LA "+yytext());return new Symbol(sym.ID,new String(yytext()));}
 					case -7:
 						break;
 					case 7:
-						{System.out.println("LA "+yytext());return new Symbol(sym.DIVIDE);}
+						{System.out.println("LA "+yytext());return new Symbol(sym.NUM ,new Integer(yytext()));}
 					case -8:
 						break;
 					case 8:
-						{System.out.println("LA "+yytext());return new Symbol(sym.MOD);}
+						
 					case -9:
 						break;
 					case 9:
-						{System.out.println("LA "+yytext());return new Symbol(sym.SEMI);}
+						{System.out.println("LA "+yytext());return new Symbol(sym.INT);}
 					case -10:
 						break;
 					case 10:
-						{System.out.println("LA "+yytext());return new Symbol(sym.LPAREN);}
+						{System.out.println("LA "+yytext());return new Symbol(sym.STRING);}
 					case -11:
 						break;
 					case 11:
-						{System.out.println("LA "+yytext());return new Symbol(sym.RPAREN);}
+						{System.out.println("LA "+yytext());return new Symbol(sym.ID,new String(yytext()));}
 					case -12:
 						break;
 					case 12:
-						{System.out.println("LA newline");return new Symbol(sym.NL);}
+						{System.out.println("LA "+yytext());return new Symbol(sym.ID,new String(yytext()));}
 					case -13:
 						break;
 					case 13:
-						
+						{System.out.println("LA "+yytext());return new Symbol(sym.ID,new String(yytext()));}
 					case -14:
 						break;
 					case 14:
-						{System.out.println("LA TYPE "+yytext());return new Symbol(sym.TYPE);}
+						{System.out.println("LA "+yytext());return new Symbol(sym.ID,new String(yytext()));}
 					case -15:
 						break;
 					case 15:
-						{System.out.println("LA TYPE "+yytext());return new Symbol(sym.TYPE);}
+						{System.out.println("LA "+yytext());return new Symbol(sym.ID,new String(yytext()));}
 					case -16:
 						break;
-					case 23:
-						{System.out.println("LA ID "+yytext());return new Symbol(sym.ID);}
+					case 16:
+						{System.out.println("LA "+yytext());return new Symbol(sym.ID,new String(yytext()));}
 					case -17:
 						break;
-					case 24:
-						{System.out.println("LA ID "+yytext());return new Symbol(sym.ID);}
+					case 17:
+						{System.out.println("LA "+yytext());return new Symbol(sym.ID,new String(yytext()));}
 					case -18:
 						break;
 					default:

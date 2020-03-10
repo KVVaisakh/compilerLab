@@ -1,2 +1,2 @@
 int a,b;
-float c,d;
+string s;

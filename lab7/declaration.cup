@@ -1,33 +1,31 @@
 import java_cup.runtime.*;
 import java.util.*;
 
-	init with {: :};
-	scan with {: return getScanner().next_token(); :};
-	terminal SEMI,PLUS,MINUS,TIMES,DIVIDE,MOD,NL,EOFILE,TYPE,ID,COMMA;
-	terminal UMINUS,LPAREN,RPAREN;
-	terminal Integer NUMBER;
+init with {: :};
 
-	non terminal            st, expr_list, expr_part,prog,id,declaration;
-	non terminal Integer    expr;
+action code {: Map<String,String> hash = new HashMap<String,String>();
+				String maintype;
+			 :};
 
-	precedence left PLUS, MINUS;
-	precedence left TIMES, DIVIDE, MOD;
-	precedence left UMINUS;
-
-	st::=prog EOFILE{: System.out.println("Valid Declaration"); System.exit(0); :};
-	prog::=expr_list|declaration;
-	declaration::=	TYPE id SEMI	{: System.exit(0); :}|
-					TYPE id SEMI NL declaration|
-					TYPE id SEMI NL expr_list;
-	expr_list ::= 	expr_list expr_part | expr_part;
-	expr_part ::= 	expr:e SEMI NL expr_part{: System.out.println("= " + e); :}|
-					expr:e SEMI {: System.out.println("= " + e); System.exit(0); :};
-	expr      ::=   expr:e1 PLUS expr:e2  {: RESULT = new Integer(e1.intValue() + e2.intValue()); :} | 
-					expr:e1 MINUS expr:e2 {: RESULT = new Integer(e1.intValue() - e2.intValue()); :} | 
-					expr:e1 TIMES expr:e2 {: RESULT = new Integer(e1.intValue() * e2.intValue()); :} |
-					expr:e1 DIVIDE expr:e2{: RESULT = new Integer(e1.intValue() / e2.intValue()); :} |
-	            	expr:e1 MOD expr:e2   {: RESULT = new Integer(e1.intValue() % e2.intValue()); :} |
-					NUMBER:n              {: RESULT = n; :} |
-					MINUS expr:e          {: RESULT = new Integer(0 - e.intValue()); :} %prec UMINUS |
-					LPAREN expr:e RPAREN  {: RESULT = e; :};
-	id			::= ID COMMA id|ID;
+scan with {: return getScanner().next_token(); :};
+terminal INT,STRING,COMMA,ID, SPACE, EOFILE,NL,EQ,QUOTE,STR,NIL,VAR,FLOAT,DECIMAL,SEMI,NUM;
+non terminal prog, stmt, decln, s,val, type ,idlist;
+s ::= prog {: System.out.println("Completed Parsing");System.exit(0); :} EOFILE {:System.exit(0);:} ;
+prog ::= prog stmt|stmt;
+stmt ::= decln|SPACE|NL;
+decln ::= type:d{: maintype=new String(d.toString()); :} SPACE idlist SEMI;
+idlist ::=ID:e 
+			{:	if(hash.get(e)==null)
+				{	
+					System.out.println("Valid Declaration, Adding "+maintype+" "+ e +" to HashMap");
+					hash.put(e.toString(),maintype);	
+				}
+				else
+				{	System.out.println("Error : Dupicate Declaration");	}
+			:} 
+			|idlist COMMA;
+type::=	INT{: RESULT=new String("int"); :}|
+		STRING{: RESULT=new String("string"); :}|
+		VAR{: RESULT=new String("var"); :}|
+		FLOAT{: RESULT=new String("float"); :}|
+		DECIMAL{: RESULT=new String("decimal"); :};
